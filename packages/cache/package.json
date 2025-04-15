@@ -1,0 +1,19 @@
+{
+  "name": "cache",
+  "module": "index.ts",
+  "type": "module",
+  "exports": {
+    "./client": "./src/index.ts"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/ioredis": "^5.0.0",
+    "redis": "^4.7.0"
+  }
+}
