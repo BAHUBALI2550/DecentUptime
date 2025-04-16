@@ -99,37 +99,37 @@ Decentralized Uptime Monitor is a next-generation website monitoring system leve
    ````
 
 2. **Install dependencies**
-```bash
-   bun install
-   ```
+    ```bash
+    bun install
+    ```
 
 3. **Configure environment variables**
-Create a .env file in the project root (copy the provided .env.example if available):
-```env
-   # Server
-PORT=3000
+* Create a .env file in the project root (copy the provided .env.example if available): *
+    ```env
+    # Server
+    PORT=3000
 
-# PostgreSQL
-DATABASE_URL=postgresql://user:password@localhost:5432/uptime_db
+    # PostgreSQL
+    DATABASE_URL=postgresql://user:password@localhost:5432/uptime_db
 
-# Redis
-REDIS_URL=redis://localhost:6379
+    # Redis
+    REDIS_URL=redis://localhost:6379
 
-# Email Notifications
-EMAIL_USER=your-email@example.com
-EMAIL_PASS=your-app-password
+    # Email Notifications
+    EMAIL_USER=your-email@example.com
+    EMAIL_PASS=your-app-password
 
-# Geolocation API
-IP_API_URL=http://ip-api.com/json/
+    # Geolocation API
+    IP_API_URL=http://ip-api.com/json/
 
-# Solana / Blockchain
-SOLANA_KEYPAIR_PATH=/path/to/keypair.json
-SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+    # Solana / Blockchain
+    SOLANA_KEYPAIR_PATH=/path/to/keypair.json
+    SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
 
-# Node Location
-NODE_REGION=us-east-1
+    # Node Location
+    NODE_REGION=us-east-1
 
-   ```
+    ```
 
 4. **Run Database Migrations**
     ```bash
@@ -143,7 +143,7 @@ NODE_REGION=us-east-1
 5. **Launch the application**
     ````bash
     bun start
-    ```
+    ````
 
 
 
