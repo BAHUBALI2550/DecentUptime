@@ -8,5 +8,9 @@
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "nodemailer": "^6.10.1"
   }
 }

@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../../node_modules/.prisma/client"
+  output = "../../../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -23,6 +23,7 @@ model Website {
   id        String      @id     @default(uuid())
   url       String
   userId    String
+  email     String            
   ticks     WebsiteTick[]
   disabled  Boolean     @default(false)
 }

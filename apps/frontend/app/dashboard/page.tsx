@@ -4,7 +4,7 @@ import { ChevronDown, ChevronUp, Globe, Plus, Moon, Sun } from 'lucide-react';
 import { useWebsites } from '@/hooks/useWebsites';
 import axios from "axios";
 import { API_BACKEND_URL } from '@/config';
-import { useAuth } from '@clerk/nextjs';
+import { useAuth, useUser } from '@clerk/nextjs';
 
 type UptimeStatus = "good" | "bad" | "unknown";
 
@@ -125,6 +125,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { websites, refreshWebsites } = useWebsites();
   const { getToken } = useAuth();
+  const { user } = useUser();
 
   const processedWebsites = useMemo(() => {
     return websites.map(website => {
@@ -237,6 +238,7 @@ function App() {
           setIsModalOpen(false)
           axios.post(`${API_BACKEND_URL}/api/v1/website`, {
             url,
+            email: user?.primaryEmailAddress?.emailAddress
           }, {
             headers: {
               Authorization: token,

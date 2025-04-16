@@ -2,6 +2,7 @@ import { randomUUIDv7, type ServerWebSocket } from "bun";
 import type { IncomingMessage, SignupIncomingMessage } from "common/types";
 import { prismaClient } from "db/client";
 import { PublicKey } from "@solana/web3.js";
+import { sendEmailAlert } from "./utils/email";
 import nacl from "tweetnacl";
 import nacl_util from "tweetnacl-util";
 
@@ -172,6 +173,13 @@ setInterval(async () => {
                             },
                         });
                     });
+                    if( status === "Bad") {
+                        await sendEmailAlert(
+                            website.email,
+                            `⚠️Alert: ${website.url} is down`,
+                            `Website ${website.url} is reporting status "${status}" with latency ${latency}ms.`
+                        );
+                    }
                 }
             };
         });
