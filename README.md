@@ -30,6 +30,7 @@ Decentralized Uptime Monitor is a next-generation website monitoring system leve
 | **WebSocket**        | Real-time, bidirectional communication for live dashboard and alerts                    |
 | **Nodemailer**       | Email sending for alert notifications                                                   |
 | **ip-api.com**       | Region/geolocation mapping from node IP addresses                                       |
+| **Docker**           | Containerized local setup for Redis and PostgreSQL                                      |
 
 
 ----
@@ -46,6 +47,7 @@ Decentralized Uptime Monitor is a next-generation website monitoring system leve
 - **Geolocation Intelligence**: Each node tags status with its true location (powered by `ip-api.com`).
 - **Scalable**: Easily add more nodes to cover new regions and increase monitoring fidelity.
 - **Modern Dev Processing**: Built, tested, and managed using `Bun`.
+- **Easy Local Setup:** Use Docker for a quick, reliable local environment for your database and Redis
 
 
 ----
@@ -85,10 +87,48 @@ Decentralized Uptime Monitor is a next-generation website monitoring system leve
 ### Prerequisites
 - **Node.js** (v16+ recommended)  
 - **Bun** (v1+)  
+- **Docker Desktop** (https://www.docker.com/) (for local development)
 - **PostgreSQL server** (local or remote)  
 - **Redis server**  
-- **Solana wallet** and API key for blockchain interactions  
-- *(Optional)* Docker, for containerized deployment  
+- **Solana wallet** and API key for blockchain interactions
+
+### Local Database & Redis Setup with Docker
+
+Use Docker Compose for local development to easily spin up PostgreSQL and Redis services.
+
+**1. Create a `docker-compose.yml` in your project root:**
+
+```yaml
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: <password>
+      POSTGRES_DB: postgres
+    ports:
+      - '5433:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports:
+      - '6379:6379'
+    volumes:
+      - redisdata:/data
+
+volumes:
+  pgdata:
+  redisdata:
+```
+
+**2. Start the services:**
+```sh
+docker-compose up -d
+```
+
+This will start both PostgreSQL and Redis on their default local ports.
 
 ### Installation
 
@@ -174,7 +214,7 @@ See [`docs/NODE_SETUP.md`](docs/NODE_SETUP.md) for setup and requirements.
 
 - [System Architecture](docs/architecture.md)
 - [API Documentation](docs/api.md)
-- [Node Setup Guide](docs/NODE_SETUP.md)
+- [Node Setup Guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [Solana Blockchain Logging](docs/solana_logging.md)
 
 
@@ -209,6 +249,7 @@ A massive thanks to the creators and maintainers of the following tools, librari
 - [web3.js](https://github.com/solana-labs/solana-web3.js)
 - [Node.js](https://nodejs.org)
 - [Bun](https://bun.sh)
+- [Docker](https://www.docker.com/products/docker-desktop/)
 - [Prisma](https://www.prisma.io)
 - [PostgreSQL](https://www.postgresql.org)
 - [Redis](https://redis.io)
