@@ -150,7 +150,7 @@ This will start both PostgreSQL and Redis on their default local ports.
     PORT=3000
 
     # PostgreSQL
-    DATABASE_URL=postgresql://user:password@localhost:5432/uptime_db
+    DATABASE_URL=postgresql://postgres:<password>@localhost:5433/postgres
 
     # Redis
     REDIS_URL=redis://localhost:6379
