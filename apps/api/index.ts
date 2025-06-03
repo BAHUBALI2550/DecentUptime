@@ -66,6 +66,7 @@ app.get("/api/v1/websites", authMiddleware as any, async (req, res) => {
     })
 })
 
+// delete a website from database
 app.delete("/api/v1/website/", authMiddleware as any, async (req, res) => {
     const websiteId = req.body.websiteId;
     const userId = req.userId!;

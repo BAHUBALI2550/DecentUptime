@@ -11,7 +11,7 @@ const availableValidators: { validatorId: string, socket: ServerWebSocket<unknow
 const CALLBACKS : { [callbackId: string]: (data: IncomingMessage) => void } = {}
 const COST_PER_VALIDATION = 100; //in lamports 100 lamport = 0.000001 SOL
 
-Bun.serve({         // establishing a simple HTTP server
+Bun.serve({         // a simple HTTP server
     fetch(req, server) {
       if (server.upgrade(req)) {             // upgrade the server to a websocket
         return;
@@ -39,7 +39,7 @@ Bun.serve({         // establishing a simple HTTP server
             }
         },
         async close(ws: ServerWebSocket<unknown>) {
-            availableValidators.splice(availableValidators.findIndex(v => v.socket === ws), 1);     // when validators exits close the websocket and remove from available validators array
+            availableValidators.splice(availableValidators.findIndex(v => v.socket === ws), 1);     // when validators exits remove from available validators array
         }
     },
 });
@@ -79,7 +79,7 @@ async function signupHandler(ws: ServerWebSocket<unknown>, { publicKey, callback
             },
         }));
 
-        availableValidators.push({                 // add the validator to available validator array
+        availableValidators.push({                 // add the validator to validator array
             validatorId: validatorDb.id,
             socket: ws,
             publicKey: validatorDb.publicKey,
@@ -87,7 +87,6 @@ async function signupHandler(ws: ServerWebSocket<unknown>, { publicKey, callback
         return;
     }
     
-    //TODO: Given the ip, return the location
     const ip = ws?.remoteAddress || "unknown";
     const location = await getLocationFromIp(ip)
     const validator = await prismaClient.validator.create({               // if valdator is not i the database, then add to database
@@ -176,7 +175,7 @@ setInterval(async () => {
                     if( status === "Bad") {
                         await sendEmailAlert(
                             website.email,
-                            `⚠️Alert: ${website.url} is down`,
+                            `Alert: ${website.url} is down`,
                             `Website ${website.url} is reporting status "${status}" with latency ${latency}ms.`
                         );
                     }

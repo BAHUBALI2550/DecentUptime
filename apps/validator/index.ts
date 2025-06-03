@@ -35,7 +35,7 @@ async function main() {
             type: 'signup',
             data: {
                 callbackId,
-                ip: '127.0.0.1',                         // this shouldn't be hardcoded, but should be the ip of area like africa, usa, asia
+                ip: '127.0.0.1',                         
                 publicKey: keypair.publicKey,
                 signedMessage,
             },
@@ -92,7 +92,7 @@ async function signMessage(message: string, keypair: Keypair) {
 
 main();
 
-setInterval(async () => {                    // to run the application for a long time
+setInterval(async () => {                   
 
 }, 10000);
 
